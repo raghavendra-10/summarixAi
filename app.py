@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 import assemblyai as aai
 import requests
@@ -5,7 +6,7 @@ import requests
 app = Flask(__name__)
 
 # Replace with your AssemblyAI API key
-aai.settings.api_key = "2c0ec7fb75424e1083f4e3efaae87210"
+aai.settings.api_key = os.getenv('ASSEMBLYAI_API_KEY')
 
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
