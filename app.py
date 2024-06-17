@@ -5,7 +5,7 @@ import requests
 
 app = Flask(__name__)
 
-# Replace with your AssemblyAI API key
+# Use the AssemblyAI API key from the environment variable
 aai.settings.api_key = os.getenv('ASSEMBLYAI_API_KEY')
 
 @app.route('/transcribe', methods=['POST'])
@@ -26,7 +26,7 @@ def transcribe():
             print(f"Uploaded file is not recognized as audio: {head_response.headers.get('Content-Type')}")
             return jsonify({"error": "Uploaded file is not recognized as audio"}), 400
         
-        # Configure the transcription with speaker labels and auto-highlights
+        # Configure the transcription with enhanced speaker labels and auto-highlights
         config = aai.TranscriptionConfig(speaker_labels=True, auto_highlights=True)
         transcriber = aai.Transcriber()
         transcript = transcriber.transcribe(file_url, config=config)
